@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Bittii ❤️</title>
-
-<!-- Pacifico font -->
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 <style>
 html, body { height:100%; margin:0; font-family: 'Pacifico', cursive; overflow:hidden; }
 body {
@@ -28,6 +25,7 @@ body {
   display:flex;
   justify-content:space-between;
   width:200px;
+  position:relative;
 }
 
 button {
@@ -65,12 +63,12 @@ button {
   width:100%;
   height:100%;
   object-fit:cover;
-  display:none;
   border-radius:20px;
   box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  transform: translateX(100%);
+  transition: transform 1.5s ease-in-out;
 }
 
-/* Last message */
 #lastMessage {
   display:none;
   margin-top:18px;
@@ -81,7 +79,6 @@ button {
 }
 </style>
 </head>
-
 <body>
 
 <div id="mainMessage">
@@ -96,7 +93,6 @@ Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby 
 </div>
 
 <div id="photoContainer">
-  <!-- Add your photos -->
   <img src="IMG_20241222_122949 (2).jpg" class="slidePhoto">
   <img src="IMG_20250511_184400 (1).jpg" class="slidePhoto">
   <img src="IMG_20250511_184402 (1).jpg" class="slidePhoto">
@@ -128,7 +124,7 @@ const photos = document.querySelectorAll('.slidePhoto');
 const song = document.getElementById('song');
 const lastMsg = document.getElementById('lastMessage');
 
-// No button logic: only move inside viewport
+// No button always move inside viewport
 function moveNo() {
   const maxX = window.innerWidth - noBtn.offsetWidth;
   const maxY = window.innerHeight - noBtn.offsetHeight;
@@ -138,58 +134,36 @@ function moveNo() {
 noBtn.addEventListener('mouseover', moveNo);
 noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
 
-// Easing function for smooth slide
-function easeInOut(t) {
-  return t<0.5 ? 2*t*t : -1+(4-2*t)*t;
-}
-
-// Yes button logic
+// Yes button click
 yesBtn.addEventListener('click', () => {
-  song.currentTime = 0;
+  song.currentTime=0;
   song.play().catch(()=>{});
 
   yesBtn.style.display='none';
   noBtn.style.display='none';
 
   let index = 0;
-  let direction = 1; // left->right or right->left
-
-  function slidePhoto(photo, dir, callback) {
-    photo.style.display='block';
-    let start = dir===1 ? -100 : 100; // % from left
-    let end = 0;
-    let duration = 1500; // ms
-    let startTime = null;
-
-    function animate(time) {
-      if(!startTime) startTime=time;
-      let t = (time-startTime)/duration;
-      if(t>1) t=1;
-      let pos = start + (end-start)*easeInOut(t);
-      photo.style.left = pos + '%';
-      if(t<1) {
-        requestAnimationFrame(animate);
-      } else {
-        setTimeout(callback, 500);
-      }
-    }
-    requestAnimationFrame(animate);
-  }
-
-  function showNext() {
+  function showPhoto() {
     if(index >= photos.length) {
       lastMsg.style.display='block';
       return;
     }
-    slidePhoto(photos[index], direction, () => {
-      photos[index].style.left='0';
-      index++;
-      direction*=-1; // flip direction
-      showNext();
-    });
+    const current = photos[index];
+    // slide in
+    current.style.transform='translateX(0)';
+    current.style.display='block';
+    setTimeout(()=>{
+      // slide out after 2s
+      current.style.transform = index%2===0 ? 'translateX(-100%)' : 'translateX(100%)';
+      setTimeout(()=>{
+        current.style.display='none';
+        index++;
+        showPhoto();
+      }, 1500); // slide out duration
+    }, 2000); // visible duration
   }
 
-  showNext();
+  showPhoto();
 });
 </script>
 

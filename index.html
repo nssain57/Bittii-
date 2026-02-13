@@ -10,17 +10,17 @@ html, body {
   margin:0; padding:0; height:100%;
   font-family: 'Pacifico', cursive;
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  overflow-x:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  overflow:hidden;
 }
 
 .container {
-  width:100%; max-width:480px; text-align:center; padding:20px; box-sizing:border-box;
-  margin-top:50px; /* Message thoda niche dikhne ke liye */
+  width:100%; max-width:480px; text-align:center;
+  box-sizing:border-box; position:relative;
 }
 
 #message {
-  color:#fff; font-size:20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+  color:#fff; font-size:20px; text-shadow:2px 2px 10px rgba(0,0,0,0.7);
   margin-bottom:20px;
 }
 
@@ -39,12 +39,12 @@ button {
 #no { background:#555; color:white; position:absolute; left:0; top:0; }
 
 #photoContainer {
-  width:100%; height:60vh; position:relative; overflow:hidden; margin-bottom:20px;
+  width:100%; height:55vh; position:relative; overflow:hidden; margin-bottom:20px;
 }
 
 .slidePhoto {
   position:absolute; top:0; width:100%; height:100%; object-fit:cover;
-  border-radius:20px; opacity:0; transition: all 1.8s ease-in-out;
+  border-radius:20px; opacity:0; transition: all 2s ease-in-out;
   left:100%;
 }
 
@@ -58,8 +58,8 @@ button {
 
 <div class="container">
   <div id="message">
-    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye kuch nhi kiya but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
-    Bittii 🦋 Mera buggu🤗 will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
+    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
   </div>
 
   <div class="buttons">
@@ -71,7 +71,7 @@ button {
 
   <div id="lastMessage">
     Bittii i love 💕 😘 you so much Mera ballu <br>
-    i miss u yaar and i hope hmm milenge jldi hi
+    i miss u hope hmm milenge jldi hi
   </div>
 </div>
 
@@ -85,7 +85,6 @@ const noBtn = document.getElementById('no');
 const photoContainer = document.getElementById('photoContainer');
 const music = document.getElementById('music');
 const lastMsg = document.getElementById('lastMessage');
-const messageDiv = document.getElementById('message');
 
 // Photo files (already uploaded)
 const photoFiles = [
@@ -112,7 +111,7 @@ photoFiles.forEach(src => {
   preloadedImages.push(img);
 });
 
-// NO button moves continuously, cannot click
+// NO button moves continuously within container
 function moveNo() {
   const containerRect = document.querySelector('.buttons').getBoundingClientRect();
   const maxX = containerRect.width - noBtn.offsetWidth;
@@ -160,4 +159,5 @@ yesBtn.addEventListener('click', async ()=>{
 
 </body>
 </html>
+
 

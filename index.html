@@ -3,169 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Bittii ❤️</title>
+<title>For Bitti ❤️</title>
+
+<!-- Google Font Pacifico -->
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
-html, body { height:100%; margin:0; font-family: 'Pacifico', cursive; overflow:hidden; }
-body {
+html, body {
+  margin:0; padding:0; height:100%; width:100%;
+  font-family: 'Pacifico', cursive;
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  display:flex; justify-content:center; align-items:flex-start;
+  overflow-x:hidden;
 }
 
-#mainMessage {
-  color:#ff2f92;
-  font-size:20px;
+.container {
+  width: 100%; max-width: 420px;
+  margin-top: 50px;
+  padding: 10px 15px;
   text-align:center;
-  margin-bottom:18px;
-  text-shadow: 0 2px 10px rgba(255,255,255,0.7);
+  box-sizing:border-box;
+}
+
+#firstMessage {
+  font-size:18px;
+  color:#fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-bottom:20px;
 }
 
 .buttons {
-  margin-top:12px;
   display:flex;
   justify-content:space-between;
-  width:200px;
+  margin-bottom:20px;
   position:relative;
 }
 
 button {
-  padding:12px 24px;
+  padding:14px 24px;
   font-size:18px;
   border:none;
   border-radius:28px;
   cursor:pointer;
-  transition:0.2s ease;
+  transition:.2s ease;
 }
 
 #yes {
-  background:#ff6fb7; color:white;
+  background:#ff6fb7;
+  color:white;
   box-shadow:0 6px 18px rgba(255,0,120,.35);
 }
-#yes:active { transform: scale(0.94); }
 
 #no {
-  background:#555; color:white;
-  position:absolute; left:0;
-}
-
-/* Photo container */
-#photoContainer {
-  position:relative;
-  width:90vw; max-width:400px;
-  height:50vh;
-  margin-top:20px;
-  overflow:hidden;
-}
-
-/* Sliding photos */
-.slidePhoto {
+  background:#555;
+  color:white;
   position:absolute;
+  left:0;
+}
+
+#photoContainer {
   width:100%;
-  height:100%;
+  height:220px;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:20px;
+}
+
+.slidePhoto {
+  width: 100%;
+  height: 100%;
   object-fit:cover;
   border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
-  transform: translateX(100%);
-  transition: transform 1.5s ease-in-out;
+  position:absolute;
+  left:100%; /* start outside right */
+  transition: left 1.5s ease-in-out;
 }
 
 #lastMessage {
-  display:none;
-  margin-top:18px;
   font-size:18px;
-  color:#ff4fa3;
-  text-align:center;
-  text-shadow:0 2px 10px rgba(255,255,255,0.7);
+  color:#fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  display:none;
+  margin-top:20px;
 }
 </style>
 </head>
+
 <body>
+<div class="container">
+  <div id="firstMessage">
+    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
+    <br>Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+  </div>
 
-<div id="mainMessage">
-Hello 👋 meri bitti kya haal Mera duggu🫣😘💐.<br>
-i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao<br>
-Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+  <div class="buttons">
+    <button id="no">😡 No</button>
+    <button id="yes">🤗 Yes</button>
+  </div>
+
+  <div id="photoContainer"></div>
+
+  <div id="lastMessage">
+    Bittii i love 💕 😘 you so much Mera ballu <br> i miss u hope hmm milenge jldi hi
+  </div>
 </div>
 
-<div class="buttons">
-  <button id="yes">YES 🤗</button>
-  <button id="no">NO 😡</button>
-</div>
-
-<div id="photoContainer">
-  <img src="IMG_20241222_122949 (2).jpg" class="slidePhoto">
-  <img src="IMG_20250511_184400 (1).jpg" class="slidePhoto">
-  <img src="IMG_20250511_184402 (1).jpg" class="slidePhoto">
-  <img src="IMG_20250511_184443.jpg" class="slidePhoto">
-  <img src="IMG_20251225_135220 (1).jpg" class="slidePhoto">
-  <img src="IMG_20251225_145348.jpg" class="slidePhoto">
-  <img src="IMG_20251225_160243.jpg" class="slidePhoto">
-  <img src="IMG_20251225_215527.jpg" class="slidePhoto">
-  <img src="IMG_20251225_232613.jpg" class="slidePhoto">
-  <img src="IMG_20251226_004530.jpg" class="slidePhoto">
-  <img src="IMG_20260117_212207.jpg" class="slidePhoto">
-  <img src="Videoshot_20250721_215442.jpg" class="slidePhoto">
-  <img src="Videoshot_20250721_215630.jpg" class="slidePhoto">
-</div>
-
-<div id="lastMessage">
-Bittii i love 💕 😘 you so much Mera ballu <br>
-i miss u hope hmm milenge jldi hi
-</div>
-
-<audio id="song" preload="auto">
+<audio id="music">
   <source src="Finding Her - kushagra.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const yesBtn = document.getElementById('yes');
+// Files for sliding photos
+const photoFiles = [
+  'IMG_20241222_122949 (2).jpg',
+  'IMG_20250511_184400 (1).jpg',
+  'IMG_20250511_184402 (1).jpg',
+  'IMG_20250511_184443.jpg',
+  'IMG_20251225_135220 (1).jpg',
+  'IMG_20251225_145348.jpg',
+  'IMG_20251225_160243.jpg',
+  'IMG_20251225_215527.jpg',
+  'IMG_20251225_232613.jpg',
+  'IMG_20251226_004530.jpg',
+  'IMG_20260117_212207.jpg',
+  'Videoshot_20250721_215442.jpg',
+  'Videoshot_20250721_215630.jpg'
+];
+
 const noBtn = document.getElementById('no');
-const photos = document.querySelectorAll('.slidePhoto');
-const song = document.getElementById('song');
+const yesBtn = document.getElementById('yes');
+const photoContainer = document.getElementById('photoContainer');
+const music = document.getElementById('music');
 const lastMsg = document.getElementById('lastMessage');
 
-// No button always move inside viewport
-function moveNo() {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
-  noBtn.style.left = Math.random() * maxX + 'px';
-  noBtn.style.top = Math.random() * maxY + 'px';
+// NO Button behavior
+function moveNoButton() {
+  const rect = document.querySelector('.buttons').getBoundingClientRect();
+  const maxX = rect.width - noBtn.offsetWidth;
+  const maxY = 0;
+  noBtn.style.left = Math.random()*maxX + 'px';
+  noBtn.style.top = Math.random()*maxY + 'px';
 }
-noBtn.addEventListener('mouseover', moveNo);
-noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
+noBtn.addEventListener('mouseover', moveNoButton);
+noBtn.addEventListener('touchstart', e=>{e.preventDefault(); moveNoButton();});
 
-// Yes button click
-yesBtn.addEventListener('click', () => {
-  song.currentTime=0;
-  song.play().catch(()=>{});
-
+// YES Button behavior
+yesBtn.addEventListener('click', async ()=>{
   yesBtn.style.display='none';
   noBtn.style.display='none';
+  music.currentTime=0;
+  music.play().catch(()=>{});
 
-  let index = 0;
-  function showPhoto() {
-    if(index >= photos.length) {
-      lastMsg.style.display='block';
-      return;
-    }
-    const current = photos[index];
-    // slide in
-    current.style.transform='translateX(0)';
-    current.style.display='block';
-    setTimeout(()=>{
-      // slide out after 2s
-      current.style.transform = index%2===0 ? 'translateX(-100%)' : 'translateX(100%)';
-      setTimeout(()=>{
-        current.style.display='none';
-        index++;
-        showPhoto();
-      }, 1500); // slide out duration
-    }, 2000); // visible duration
+  for(let i=0;i<photoFiles.length;i++){
+    let img = document.createElement('img');
+    img.src = photoFiles[i];
+    img.className='slidePhoto';
+    photoContainer.appendChild(img);
+
+    // Wait small delay then slide in
+    await new Promise(r=>setTimeout(r,100));
+    img.style.left='0';
+
+    // Wait for transition to finish
+    await new Promise(r=>setTimeout(r,1600));
+
+    // Slide out left if even index, right if odd index
+    img.style.left=(i%2===0 ? '-100%' : '100%');
+    await new Promise(r=>setTimeout(r,1600));
+
+    // Remove img from container after sliding out
+    photoContainer.removeChild(img);
   }
 
-  showPhoto();
+  // Show last message
+  lastMsg.style.display='block';
 });
 </script>
-
 </body>
 </html>

@@ -29,14 +29,16 @@
     box-sizing: border-box;
   }
 
-  #message {
+  #firstMessage, #finalMessage {
     font-size: 20px;
     color: #ff4fa3;
     font-weight: 700;
     text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
     margin-bottom: 20px;
-    opacity: 0;
-    transition: opacity 1s ease;
+  }
+
+  #finalMessage {
+    display: none;
   }
 
   .buttons {
@@ -88,7 +90,7 @@
     height: auto;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-    transition: transform 1s ease;
+    transition: transform 1s ease, opacity 1s ease;
     display: none;
   }
 
@@ -97,7 +99,8 @@
 <body>
 
 <div class="container">
-  <div id="message">
+  <!-- FIRST MESSAGE WITH BUTTONS -->
+  <div id="firstMessage">
     Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
     <br>Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
   </div>
@@ -122,6 +125,12 @@
     <button id="no">NO 😡</button>
     <button id="yes">YES 🤗</button>
   </div>
+
+  <div id="finalMessage">
+    Bittii i love 💕 😘 you so much Mera ballu<br>
+    i miss u hope hmm milenge jldi hi
+  </div>
+
 </div>
 
 <audio id="music">
@@ -131,7 +140,8 @@
 <script>
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
-const message = document.getElementById('message');
+const firstMessage = document.getElementById('firstMessage');
+const finalMessage = document.getElementById('finalMessage');
 const music = document.getElementById('music');
 const photoSlider = document.getElementById('photoSlider');
 const photos = photoSlider.querySelectorAll('img');
@@ -150,27 +160,30 @@ noBtn.addEventListener('touchstart', e => { e.preventDefault(); moveNo(); });
 yesBtn.addEventListener('click', () => {
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
-  message.style.opacity = 1;
   music.currentTime = 0;
   music.play().catch(()=>{});
 
-  // Show photos one by one smoothly
+  firstMessage.style.display = 'none';
+
   let i = 0;
   photos[i].style.display = 'block';
-  photos[i].style.transform = 'translateX(0)';
+  photos[i].style.opacity = 1;
 
-  const slideInterval = setInterval(() => {
-    photos[i].style.display = 'none';
-    i++;
+  const slideNext = () => {
     if(i >= photos.length) {
-      clearInterval(slideInterval);
-      // Show final message after all photos
-      message.innerHTML += '<br><br>Bittii i love 💕 😘 you so much Mera ballu<br>i miss u hope hmm milenge jldi hi';
+      finalMessage.style.display = 'block';
       return;
     }
     photos[i].style.display = 'block';
-    photos[i].style.transform = 'translateX(0)';
-  }, 2500); // 2.5s per photo
+    photos[i].style.opacity = 1;
+    setTimeout(() => {
+      photos[i].style.opacity = 0;
+      i++;
+      setTimeout(slideNext, 500); // 0.5s fade out
+    }, 2000); // 2s per photo
+  }
+
+  slideNext();
 });
 </script>
 

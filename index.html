@@ -82,7 +82,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px; /* height for mobile */
+  height: 250px; 
   position: relative;
 }
 
@@ -162,7 +162,6 @@ noBtn.addEventListener('touchstart', e => { e.preventDefault(); moveNo(); });
 yesBtn.addEventListener('click', () => {
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
-  firstMessage.style.display = 'none';
   music.currentTime = 0;
   music.play().catch(()=>{});
 
@@ -176,7 +175,6 @@ yesBtn.addEventListener('click', () => {
       return;
     }
 
-    // show current
     photos[i].style.opacity = 1;
     photos[i].style.transform = 'translateX(0)';
     photos[i].style.zIndex = 1;
@@ -185,10 +183,11 @@ yesBtn.addEventListener('click', () => {
       photos[i].style.opacity = 0;
       i++;
       if(i < photos.length) {
+        // Alternate slide direction
         photos[i].style.transform = (i%2===0 ? 'translateX(-100%)' : 'translateX(100%)');
       }
-      setTimeout(slideNext, 1000); // fade duration
-    }, 2500); // show duration
+      setTimeout(slideNext, 1200); // slow slide duration
+    }, 2500);
   }
 
   slideNext();

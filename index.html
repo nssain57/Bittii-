@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Khushi ❤️</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  text-align:center;
+  font-family:Arial;
+  background:linear-gradient(to bottom right,#ff9ec4,#ffc0cb);
+  overflow:hidden;
+}
+
+h1{
+  margin-top:80px;
+  color:white;
+  font-size:26px;
+}
+
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  margin:15px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#yes{
+  background:#ff0066;
+  color:white;
+}
+
+#yes:active{
+  transform:scale(0.95);
+}
+
+#no{
+  background:white;
+  position:absolute;
+}
+
+#photo{
+  display:none;
+  width:250px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+#message{
+  display:none;
+  color:white;
+  font-size:22px;
+  margin-top:20px;
+  padding:0 15px;
+}
+
+.heart{
+  position:fixed;
+  color:red;
+  font-size:24px;
+  animation:float 4s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>hiii meri khushi kaisi ho tum. mai batata hu okay tummmm yaar bahot beautiful ho. or cute ho. bahut bahut pretty ho. or ha meri favourite ho yaar 💖🌹</h1>
+
+<button id="yes">YES 💕</button>
+<button id="no">NO 😜</button>
+
+<br>
+
+<img src="khushi.jpg" id="photo">
+
+<div id="message">
+🙀😻 meri cutie will be my 🌹girlfriend 🥰🥰💐 naa nhi bolna  
+aur yaar I love you so much ❤️ bahut phle se
+</div>
+
+<audio id="music" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const music = document.getElementById("music");
+
+noBtn.addEventListener("mouseover",()=>{
+  noBtn.style.top = Math.random()*80+"%";
+  noBtn.style.left = Math.random()*80+"%";
+});
+
+yesBtn.addEventListener("click",celebrate);
+
+function celebrate(){
+  document.getElementById("photo").style.display="block";
+  document.getElementById("message").style.display="block";
+
+  // mobile autoplay fix
+  music.currentTime = 0;
+  music.play().catch(()=>{});
+
+  for(let i=0;i<30;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"%";
+    heart.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
+
+

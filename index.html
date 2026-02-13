@@ -72,14 +72,14 @@ button {
   margin-top:20px;
   position:relative;
   width:100%;
-  height:300px;
+  height:320px;
   overflow:hidden;
 }
 
 .flowPhoto {
   position:absolute;
   width:90%;
-  max-width:420px;
+  max-width:440px;
   border-radius:15px;
   box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
@@ -88,9 +88,10 @@ button {
   position:absolute;
   width:120px;
   pointer-events:none;
-  top:10px;
+  top:15px;
   left:50%;
   transform:translateX(-50%);
+  z-index:10;
 }
 
 #photoNames {
@@ -99,15 +100,6 @@ button {
   color:#ff2f92;
 }
 
-#finalMsg {
-  display:none;
-  background: rgba(255,255,255,0.6);
-  padding:20px;
-  border-radius:20px;
-  margin-top:20px;
-  font-weight:bold;
-  color:#ff2f92;
-}
 </style>
 </head>
 <body>
@@ -122,10 +114,6 @@ Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby 
   </div>
   <div id="photoFlow"></div>
   <div id="photoNames"></div>
-  <div id="finalMsg">
-Bittii i love 💕 😘 you so much Mera ballu <br>
-i miss u hope hmm milenge jldi hi
-  </div>
 </div>
 
 <audio id="music">
@@ -153,9 +141,8 @@ const noBtn = document.getElementById('no');
 const yesBtn = document.getElementById('yes');
 const photoFlow = document.getElementById('photoFlow');
 const photoNames = document.getElementById('photoNames');
-const finalMsg = document.getElementById('finalMsg');
-const music = document.getElementById('music');
 const messagePopup = document.getElementById('messagePopup');
+const music = document.getElementById('music');
 
 // Animate message popup on load
 window.addEventListener('load', () => {
@@ -165,7 +152,7 @@ window.addEventListener('load', () => {
   },500);
 });
 
-// NO button moves continuously, cannot click
+// NO button moves randomly
 function moveNo(){
   const maxX = window.innerWidth - noBtn.offsetWidth - 20;
   const maxY = window.innerHeight - noBtn.offsetHeight - 20;
@@ -176,27 +163,29 @@ noBtn.addEventListener('mouseover', moveNo);
 noBtn.addEventListener('touchstart', moveNo);
 noBtn.addEventListener('click', e=>{ e.preventDefault(); });
 
-// YES button click
-yesBtn.addEventListener('click',()=>{
-  messagePopup.style.display='none';
+// YES button
+yesBtn.addEventListener('click', ()=>{
+  messagePopup.style.opacity=0.0;
   yesBtn.style.display='none';
   noBtn.style.display='none';
 
   music.currentTime=0;
   music.play().catch(()=>{});
 
-  let i = 0;
+  let i=0;
+
   function showNextPhoto(){
     if(i>=photos.length){
-      finalMsg.style.display='block';
+      // All photos done
+      photoNames.innerHTML = photos.join('<br>');
       return;
     }
+
     const img = document.createElement('img');
     img.src = photos[i];
     img.className='flowPhoto';
     photoFlow.appendChild(img);
 
-    // butterfly GIF overlay
     const butterfly = document.createElement('img');
     butterfly.src='dezyne_3d-butterflies-25807_512.gif';
     butterfly.className='butterflyGif';
@@ -204,7 +193,7 @@ yesBtn.addEventListener('click',()=>{
 
     let direction = (i%2===0)?1:-1;
     img.style.left = (direction*500)+'px';
-    img.style.opacity=0;
+    img.style.opacity = 0;
 
     setTimeout(()=>{
       img.style.transition='all 3s ease';
@@ -217,9 +206,8 @@ yesBtn.addEventListener('click',()=>{
         img.style.opacity=0;
 
         setTimeout(()=>{
-          photoNames.innerHTML += photos[i] + '<br>';
-          img.remove();
           butterfly.remove();
+          img.remove();
           i++;
           showNextPhoto();
         },3000);

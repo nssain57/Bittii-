@@ -1,221 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Surprise</title>
-<!-- Google Fonts Pacifico -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<style>
-/* Basic Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; width:100%; overflow:hidden; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Bittii ❤️</title>
 
-/* Background Wallpaper */
+<!-- Pacifico font from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+html, body { height:100%; margin:0; font-family: 'Pacifico', cursive; overflow:hidden; }
 body {
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  font-family: 'Pacifico', cursive;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
 }
 
-/* Container for everything */
-.container {
-  width: 100%;
-  max-width: 420px;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-}
-
-/* Main Message */
+/* Message styling */
 #mainMessage {
-  font-size: 20px;
-  color: #ff4fa3;
-  text-shadow: 2px 2px 6px rgba(255,255,255,0.8);
-  margin-bottom: 20px;
+  color:#ff2f92;
+  font-size:20px;
+  text-align:center;
+  margin-bottom:18px;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.7);
 }
 
 /* Buttons */
 .buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 30px;
-  position: relative;
+  margin-top:12px;
+  display:flex;
+  justify-content:space-between;
+  width:200px;
 }
 
 button {
-  font-size: 18px;
-  padding: 12px 24px;
-  border-radius: 28px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  transition: transform 0.2s ease;
+  padding:12px 24px;
+  font-size:18px;
+  border:none;
+  border-radius:28px;
+  cursor:pointer;
+  transition:0.2s ease;
 }
 
 #yes {
-  background: #4da3ff;
+  background:#ff6fb7; color:white;
+  box-shadow:0 6px 18px rgba(255,0,120,.35);
 }
+#yes:active { transform: scale(0.94); }
+
 #no {
-  background: #ff4a4a;
-  position: absolute; /* to move freely */
-  left:0;
-  top:0;
+  background:#555; color:white;
+  position:absolute; left:0;
 }
 
-/* Sliding Photos */
+/* Photo container */
 #photoContainer {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  height: 60vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
+  position:relative;
+  width:90vw; max-width:400px;
+  height:50vh;
+  margin-top:20px;
+  overflow:hidden;
 }
 
-.slidePhoto /* Sliding Photos */
+/* Sliding photos */
 .slidePhoto {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* crop mat kare, full display */
-  display: none;
-  border-radius: 20px; /* ✅ Rounded corners added */
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+  border-radius:20px; /* ✅ Rounded corners added */
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
 /* Last message */
 #lastMessage {
-  font-size: 20px;
-  color: #ff4fa3;
-  text-shadow: 2px 2px 6px rgba(255,255,255,0.8);
-  display: none;
-  margin-top: 20px;
+  display:none;
+  margin-top:18px;
+  font-size:18px;
+  color:#ff4fa3;
+  text-align:center;
+  text-shadow:0 2px 10px rgba(255,255,255,0.7);
 }
 </style>
 </head>
+
 <body>
-<div class="container">
-  <!-- Main message -->
-  <div id="mainMessage">
-    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. I know mne kuch nhi kiya valentine week me aapke liye
-    but abi shayd🫡 aap 🙀🥰🎉happy ho jao <br>
-    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
-  </div>
 
-  <!-- Buttons -->
-  <div class="buttons">
-    <button id="no">😡 No</button>
-    <button id="yes">🤗 Yes</button>
-  </div>
-
-  <!-- Photo container -->
-  <div id="photoContainer">
-    <!-- Photos dynamically loaded via JS -->
-  </div>
-
-  <!-- Last message -->
-  <div id="lastMessage">
-    Bittii i love 💕 😘 you so much Mera ballu <br>
-    I miss u hope hmm milenge jldi hi
-  </div>
+<div id="mainMessage">
+Hello 👋 meri bitti kya haal Mera duggu🫣😘💐.<br>
+i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao<br>
+Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
 </div>
 
-<!-- Song -->
-<audio id="song" src="Finding Her - kushagra.mp3"></audio>
+<div class="buttons">
+  <button id="yes">YES 🤗</button>
+  <button id="no">NO 😡</button>
+</div>
+
+<div id="photoContainer">
+  <!-- Add your photos here -->
+  <img src="IMG_20241222_122949 (2).jpg" class="slidePhoto">
+  <img src="IMG_20250511_184400 (1).jpg" class="slidePhoto">
+  <img src="IMG_20250511_184402 (1).jpg" class="slidePhoto">
+  <img src="IMG_20250511_184443.jpg" class="slidePhoto">
+  <img src="IMG_20251225_135220 (1).jpg" class="slidePhoto">
+  <img src="IMG_20251225_145348.jpg" class="slidePhoto">
+  <img src="IMG_20251225_160243.jpg" class="slidePhoto">
+  <img src="IMG_20251225_215527.jpg" class="slidePhoto">
+  <img src="IMG_20251225_232613.jpg" class="slidePhoto">
+  <img src="IMG_20251226_004530.jpg" class="slidePhoto">
+  <img src="IMG_20260117_212207.jpg" class="slidePhoto">
+  <img src="Videoshot_20250721_215442.jpg" class="slidePhoto">
+  <img src="Videoshot_20250721_215630.jpg" class="slidePhoto">
+</div>
+
+<div id="lastMessage">
+Bittii i love 💕 😘 you so much Mera ballu <br>
+i miss u hope hmm milenge jldi hi
+</div>
+
+<audio id="song" preload="auto">
+  <source src="Finding Her - kushagra.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-// ==== No button movement logic ====
-const noBtn = document.getElementById('no');
 const yesBtn = document.getElementById('yes');
-const container = document.querySelector('.container');
+const noBtn = document.getElementById('no');
+const photos = document.querySelectorAll('.slidePhoto');
+const song = document.getElementById('song');
+const lastMsg = document.getElementById('lastMessage');
 
-function moveNoButton() {
-  const parentRect = container.getBoundingClientRect();
-  const maxX = parentRect.width - noBtn.offsetWidth;
-  const maxY = 50; // keep inside top area
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+// No button logic: move randomly inside display
+function moveNo() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random() * maxX + 'px';
+  noBtn.style.top = Math.random() * maxY + 'px';
 }
+noBtn.addEventListener('mouseover', moveNo);
+noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
 
-// Move no button continuously
-noBtn.addEventListener('mouseenter', moveNoButton);
-noBtn.addEventListener('touchstart', e=> { e.preventDefault(); moveNoButton(); });
-
-// ==== Photo sliding logic ====
-const photoContainer = document.getElementById('photoContainer');
-const photos = [
-  "IMG_20241222_122949 (2).jpg",
-  "IMG_20250511_184400 (1).jpg",
-  "IMG_20250511_184402 (1).jpg",
-  "IMG_20250511_184443.jpg",
-  "IMG_20251225_135220 (1).jpg",
-  "IMG_20251225_145348.jpg",
-  "IMG_20251225_160243.jpg",
-  "IMG_20251225_215527.jpg",
-  "IMG_20251225_232613.jpg",
-  "IMG_20251226_004530.jpg",
-  "IMG_20260117_212207.jpg",
-  "Videoshot_20250721_215442.jpg",
-  "Videoshot_20250721_215630.jpg"
-];
-
-// Create img elements
-const photoElems = photos.map(src => {
-  const img = document.createElement('img');
-  img.src = src;
-  img.classList.add('slidePhoto');
-  photoContainer.appendChild(img);
-  return img;
-});
-
-// ==== Yes button click ====
+// Yes button logic
 yesBtn.addEventListener('click', () => {
-  // Play song
-  const song = document.getElementById('song');
   song.currentTime = 0;
   song.play().catch(()=>{});
 
-  // Remove buttons
-  yesBtn.style.display = 'none';
-  noBtn.style.display = 'none';
+  // hide buttons
+  yesBtn.style.display='none';
+  noBtn.style.display='none';
 
-  // Start sliding photos one by one
+  // Start photo slideshow
   let index = 0;
+  photos[index].style.display='block';
+  let direction = 1; // 1 = left to right, -1 = right to left
+
   function showNextPhoto() {
-    if(index >= photoElems.length) {
-      document.getElementById('lastMessage').style.display = 'block';
+    photos[index].style.display='none';
+    index++;
+    if(index >= photos.length){
+      lastMsg.style.display='block';
       return;
     }
-    const img = photoElems[index];
-    img.style.display = 'block';
-    img.style.left = '-100%';
-    img.style.transition = 'left 2s ease';
-    setTimeout(() => { img.style.left = '0'; }, 50); // Slide in
-
-    // Slide out after 2.5s
-    setTimeout(() => {
-      img.style.transition = 'left 2s ease';
-      img.style.left = '100%';
-      setTimeout(()=> {
-        img.style.display = 'none';
-        index++;
-        showNextPhoto();
-      }, 2000);
-    }, 2500);
+    // Set slide from left or right
+    photos[index].style.display='block';
+    photos[index].style.left = (direction === 1 ? '-100%' : '100%');
+    let pos = direction === 1 ? -100 : 100;
+    const id = setInterval(()=>{
+      pos += direction * 2; // speed
+      photos[index].style.left = pos + '%';
+      if((direction===1 && pos>=0) || (direction===-1 && pos<=0)){
+        photos[index].style.left = '0';
+        clearInterval(id);
+        direction *= -1; // next photo opposite direction
+        setTimeout(showNextPhoto, 400); // small delay
+      }
+    },20);
   }
-  showNextPhoto();
+
+  setTimeout(showNextPhoto, 400);
 });
 </script>
+
 </body>
 </html>
-

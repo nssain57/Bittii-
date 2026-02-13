@@ -2,28 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Surprise ❤️</title>
 <style>
-html,body{height:100%;margin:0;font-family:monospace}
+html,body{margin:0;padding:0;height:100%;width:100%;overflow:hidden;font-family:monospace}
 body{
   background:url('1770963669627.png') center/cover no-repeat fixed;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
-  position:relative;
 }
 .container{
   position:relative;
   width:100%;
   max-width:450px;
-  text-align:center;
   padding:20px;
   box-sizing:border-box;
+  text-align:center;
 }
 #messagePopup{
-  display:none;
+  display:block;
   font-size:18px;
   color:#ff2f92;
   font-weight:bold;
@@ -33,7 +31,13 @@ body{
   margin-bottom:20px;
   text-shadow:1px 1px 3px #fff;
 }
-.buttons{display:flex;justify-content:space-between;margin-top:10px;max-width:300px;margin:auto;}
+.buttons{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  max-width:300px;
+  margin:auto;
+}
 button{
   padding:14px 26px;
   border:none;
@@ -45,19 +49,37 @@ button{
 #yes{background:#ff6fb7;color:white;}
 #yes:active{transform:scale(.95);}
 #no{background:#555;color:white;position:relative;}
-#photoFlow{display:flex;justify-content:center;align-items:center;overflow:hidden;position:relative;height:250px;margin-top:20px;}
+#photoFlow{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+  height:300px;
+  margin-top:20px;
+}
 .flowPhoto{
-  width:120px;
-  height:180px;
+  width:200px;
+  max-width:90%;
+  height:280px;
   object-fit:cover;
   border-radius:15px;
-  margin:0 10px;
   opacity:0;
   position:absolute;
   top:0;
+  transition: transform 2s ease, opacity 2s ease;
 }
 #photoNames{display:none;margin-top:20px;color:#d63384;font-weight:bold;font-size:16px;text-align:left;}
-#finalMsg{display:none;margin-top:18px;font-size:18px;color:#ff2f92;font-weight:bold;background:rgba(255,255,255,0.6);padding:15px 20px;border-radius:15px;}
+#finalMsg{
+  display:none;
+  margin-top:18px;
+  font-size:18px;
+  color:#ff2f92;
+  font-weight:bold;
+  background:rgba(255,255,255,0.6);
+  padding:15px 20px;
+  border-radius:15px;
+}
 </style>
 </head>
 <body>
@@ -107,10 +129,7 @@ const photos=[
 'Videoshot_20250721_215630.jpg'
 ];
 
-// Show message popup at start
-setTimeout(()=>{messagePopup.style.display='block';},500);
-
-// NO button behavior
+// NO button: movable & unclickable
 function moveNo(){
   const maxX=window.innerWidth-noBtn.offsetWidth-20;
   const maxY=window.innerHeight-noBtn.offsetHeight-20;
@@ -122,15 +141,14 @@ noBtn.addEventListener('mouseover',moveNo);
 noBtn.addEventListener('touchstart',moveNo);
 noBtn.addEventListener('click',e=>{e.preventDefault();});
 
-// YES button behavior
+// YES button click
 yesBtn.addEventListener('click',()=>{
   messagePopup.style.display='none';
-  yesBtn.disabled=true;
-  noBtn.disabled=true;
+  yesBtn.style.display='none';
+  noBtn.style.display='none';
   music.currentTime=0;
   music.play().catch(()=>{});
 
-  // Flow photos
   photoFlow.innerHTML='';
   photoNames.innerHTML='';
   let i=0;
@@ -142,34 +160,27 @@ yesBtn.addEventListener('click',()=>{
     const img=document.createElement('img');
     img.src=photos[i];
     img.className='flowPhoto';
-    img.style.left='50%';
-    img.style.transform='translateX(-50%)';
     photoFlow.appendChild(img);
 
-    // Fade in/out animation
-    let opacity=0;
-    const interval=setInterval(()=>{
-      opacity+=0.02;
-      img.style.opacity=opacity;
-      if(opacity>=1){
-        clearInterval(interval);
+    // Left → right & right → left
+    let direction=(i%2===0)?1:-1;
+    img.style.transform=`translateX(${direction*400}px)`;
+    img.style.opacity=0;
+    setTimeout(()=>{
+      img.style.transition='transform 2.5s ease, opacity 2.5s ease';
+      img.style.transform='translateX(0)';
+      img.style.opacity=1;
+      setTimeout(()=>{
+        img.style.transform=`translateX(${-direction*400}px)`;
+        img.style.opacity=0;
         setTimeout(()=>{
-          // Fade out
-          let op=1;
-          const interval2=setInterval(()=>{
-            op-=0.02;
-            img.style.opacity=op;
-            if(op<=0){
-              clearInterval(interval2);
-              img.remove();
-              photoNames.innerHTML+=photos[i]+'<br>';
-              i++;
-              showNextPhoto();
-            }
-          },40);
-        },1200);
-      }
-    },40);
+          photoNames.innerHTML+=photos[i]+'<br>';
+          img.remove();
+          i++;
+          showNextPhoto();
+        },2500);
+      },2500);
+    },100);
   }
   showNextPhoto();
 });

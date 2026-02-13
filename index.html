@@ -10,12 +10,13 @@ html, body {
   margin:0; padding:0; height:100%;
   font-family: 'Pacifico', cursive;
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
   overflow-x:hidden;
 }
 
 .container {
   width:100%; max-width:480px; text-align:center; padding:20px; box-sizing:border-box;
+  margin-top:50px; /* Message thoda niche dikhne ke liye */
 }
 
 #message {
@@ -43,7 +44,7 @@ button {
 
 .slidePhoto {
   position:absolute; top:0; width:100%; height:100%; object-fit:cover;
-  border-radius:20px; transition: left 1.5s ease-in-out;
+  border-radius:20px; opacity:0; transition: all 1.8s ease-in-out;
   left:100%;
 }
 
@@ -57,8 +58,8 @@ button {
 
 <div class="container">
   <div id="message">
-    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
-    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye kuch nhi kiya but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
+    Bittii 🦋 Mera buggu🤗 will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
   </div>
 
   <div class="buttons">
@@ -70,7 +71,7 @@ button {
 
   <div id="lastMessage">
     Bittii i love 💕 😘 you so much Mera ballu <br>
-    i miss u hope hmm milenge jldi hi
+    i miss u yaar and i hope hmm milenge jldi hi
   </div>
 </div>
 
@@ -84,6 +85,7 @@ const noBtn = document.getElementById('no');
 const photoContainer = document.getElementById('photoContainer');
 const music = document.getElementById('music');
 const lastMsg = document.getElementById('lastMessage');
+const messageDiv = document.getElementById('message');
 
 // Photo files (already uploaded)
 const photoFiles = [
@@ -121,6 +123,23 @@ function moveNo() {
 noBtn.addEventListener('mouseover', moveNo);
 noBtn.addEventListener('touchstart', e=>{e.preventDefault(); moveNo();});
 
+// Function to slide a photo smoothly
+function slidePhoto(img, index) {
+  return new Promise(resolve=>{
+    photoContainer.appendChild(img);
+    img.style.left='0';
+    img.style.opacity='1';
+    setTimeout(()=>{
+      img.style.left=(index%2===0 ? '-100%' : '100%');
+      img.style.opacity='0';
+    }, 2000); // visible duration
+    setTimeout(()=>{
+      photoContainer.removeChild(img);
+      resolve();
+    }, 3800); // total animation duration
+  });
+}
+
 // YES button click
 yesBtn.addEventListener('click', async ()=>{
   yesBtn.style.display='none';
@@ -131,25 +150,14 @@ yesBtn.addEventListener('click', async ()=>{
 
   for(let i=0; i<preloadedImages.length; i++){
     const img = preloadedImages[i].cloneNode();
-    img.className = 'slidePhoto';
-    photoContainer.appendChild(img);
-
-    // Slide in
-    img.style.left='0';
-    await new Promise(r=>setTimeout(r,2000)); // slide duration
-
-    // Slide out
-    img.style.left=(i%2===0 ? '-100%' : '100%');
-    await new Promise(r=>setTimeout(r,2000));
-
-    // Remove from DOM
-    photoContainer.removeChild(img);
+    img.className='slidePhoto';
+    await slidePhoto(img, i);
   }
 
-  // Show last message
   lastMsg.style.display='block';
 });
 </script>
 
 </body>
 </html>
+

@@ -8,80 +8,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
 html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  width:100%;
+  margin:0; padding:0;
+  height:100%; width:100%;
   overflow:hidden;
   font-family: 'Parisienne', cursive;
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex; align-items:center; justify-content:center;
 }
 
 .container{
   position:relative;
-  width:95%;
-  max-width:420px;
+  width:95%; max-width:420px;
   text-align:center;
   color:#ff4fa3;
   text-shadow:0 2px 8px rgba(255,255,255,0.7);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
   padding:20px;
 }
 
 h1{
-  font-size:20px;
-  line-height:1.6;
-  margin-bottom:20px;
+  font-size:20px; line-height:1.6; margin-bottom:20px;
 }
 
 .buttons{
   margin-top:20px;
   width:100%;
-  display:flex;
-  justify-content:space-around;
+  display:flex; justify-content:space-around;
+  position:relative;
 }
 
 button{
   padding:12px 28px;
   font-size:18px;
-  border:none;
-  border-radius:28px;
+  border:none; border-radius:28px;
   cursor:pointer;
   transition:0.2s ease;
 }
 
 #yes{
-  background:#ff6fb7;
-  color:white;
+  background:#ff6fb7; color:white;
 }
-#yes:active{
-  transform:scale(0.95);
-}
+#yes:active{ transform:scale(0.95); }
 
 #no{
-  background:#555;
-  color:white;
-  position:absolute;
-  left:0;
+  background:#555; color:white;
+  position:absolute; left:0;
 }
 
 .photoDisplay{
   display:none;
-  margin-top:20px;
-  width:90%;
-  max-width:380px;
-  height:45vh;
-  object-fit:cover;
-  border-radius:20px;
+  width:90%; max-width:380px; height:45vh;
+  object-fit:cover; border-radius:20px;
   box-shadow:0 8px 25px rgba(0,0,0,0.3);
   opacity:0;
-  position:absolute;
+  margin-top:20px;
 }
 
 #finalMessage{
@@ -101,7 +82,6 @@ button{
   from {opacity:0; transform:translateX(120px);}
   to {opacity:1; transform:translateX(0);}
 }
-
 </style>
 </head>
 <body>
@@ -183,14 +163,15 @@ yesBtn.addEventListener('click', () => {
     const img = document.createElement('img');
     img.src = photos[i];
     img.className = 'photoDisplay';
+    img.style.display='block';
     img.style.animation = (i%2===0 ? 'slideInLeft' : 'slideInRight') + ' 1s forwards';
     photoContainer.appendChild(img);
-    img.style.opacity=1;
 
+    // Next photo after 2s
     i++;
     setTimeout(() => {
       showNextPhoto();
-    }, 2000); // photo display duration
+    }, 2000);
   }
 
   showNextPhoto();
@@ -199,6 +180,3 @@ yesBtn.addEventListener('click', () => {
 
 </body>
 </html>
-
-
-

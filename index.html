@@ -68,7 +68,7 @@ button {
   height:100%;
   object-fit:cover;
   display:none;
-  border-radius:20px; /* ✅ Rounded corners added */
+  border-radius:20px; /* Rounded corners */
   box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
@@ -161,23 +161,26 @@ yesBtn.addEventListener('click', () => {
       lastMsg.style.display='block';
       return;
     }
-    // Set slide from left or right
-    photos[index].style.display='block';
+
+    // Reset position for smooth slide
     photos[index].style.left = (direction === 1 ? '-100%' : '100%');
+    photos[index].style.display = 'block';
+
     let pos = direction === 1 ? -100 : 100;
+    const slideSpeed = 1; // smaller = slower, smoother
     const id = setInterval(()=>{
-      pos += direction * 2; // speed
+      pos += direction * slideSpeed;
       photos[index].style.left = pos + '%';
       if((direction===1 && pos>=0) || (direction===-1 && pos<=0)){
         photos[index].style.left = '0';
         clearInterval(id);
         direction *= -1; // next photo opposite direction
-        setTimeout(showNextPhoto, 400); // small delay
+        setTimeout(showNextPhoto, 500); // small delay between photos
       }
-    },20);
+    },10); // small interval for smooth movement
   }
 
-  setTimeout(showNextPhoto, 400);
+  setTimeout(showNextPhoto, 500);
 });
 </script>
 

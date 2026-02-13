@@ -4,116 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Bitti ❤️</title>
-
-<!-- Google Font Pacifico -->
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 <style>
 html, body {
-  margin:0; padding:0; height:100%; width:100%;
+  margin:0; padding:0; height:100%;
   font-family: 'Pacifico', cursive;
   background: url('1770963669627.png') center/cover no-repeat fixed;
-  display:flex; justify-content:center; align-items:flex-start;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
   overflow-x:hidden;
 }
 
 .container {
-  width: 100%; max-width: 420px;
-  margin-top: 50px;
-  padding: 10px 15px;
-  text-align:center;
-  box-sizing:border-box;
+  width:100%; max-width:480px; text-align:center; padding:20px; box-sizing:border-box;
 }
 
-#firstMessage {
-  font-size:18px;
-  color:#fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+#message {
+  color:#fff; font-size:20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
   margin-bottom:20px;
 }
 
 .buttons {
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:20px;
-  position:relative;
+  display:flex; justify-content:space-around; margin-bottom:20px; position:relative;
 }
 
 button {
-  padding:14px 24px;
-  font-size:18px;
-  border:none;
-  border-radius:28px;
-  cursor:pointer;
-  transition:.2s ease;
+  font-size:18px; padding:12px 24px; border:none; border-radius:28px;
+  cursor:pointer; transition:0.2s ease;
 }
 
-#yes {
-  background:#ff6fb7;
-  color:white;
-  box-shadow:0 6px 18px rgba(255,0,120,.35);
-}
+#yes { background:#ff6fb7; color:white; box-shadow:0 6px 18px rgba(255,0,120,0.35);}
+#yes:active { transform:scale(0.94); }
 
-#no {
-  background:#555;
-  color:white;
-  position:absolute;
-  left:0;
-}
+#no { background:#555; color:white; position:absolute; left:0; top:0; }
 
 #photoContainer {
-  width:100%;
-  height:220px;
-  overflow:hidden;
-  position:relative;
-  margin-bottom:20px;
+  width:100%; height:60vh; position:relative; overflow:hidden; margin-bottom:20px;
 }
 
 .slidePhoto {
-  width: 100%;
-  height: 100%;
-  object-fit:cover;
-  border-radius:20px;
-  position:absolute;
-  left:100%; /* start outside right */
-  transition: left 1.5s ease-in-out;
+  position:absolute; top:0; width:100%; height:100%; object-fit:cover;
+  border-radius:20px; transition: left 1.5s ease-in-out;
+  left:100%;
 }
 
 #lastMessage {
-  font-size:18px;
-  color:#fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  display:none;
-  margin-top:20px;
+  color:#fff; font-size:18px; text-shadow:2px 2px 10px rgba(0,0,0,0.7);
+  display:none; margin-top:15px;
 }
 </style>
 </head>
-
 <body>
+
 <div class="container">
-  <div id="firstMessage">
+  <div id="message">
     Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
-    <br>Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
   </div>
 
   <div class="buttons">
-    <button id="no">😡 No</button>
-    <button id="yes">🤗 Yes</button>
+    <button id="yes">YES 🤗</button>
+    <button id="no">NO 😡</button>
   </div>
 
   <div id="photoContainer"></div>
 
   <div id="lastMessage">
-    Bittii i love 💕 😘 you so much Mera ballu <br> i miss u hope hmm milenge jldi hi
+    Bittii i love 💕 😘 you so much Mera ballu <br>
+    i miss u hope hmm milenge jldi hi
   </div>
 </div>
 
-<audio id="music">
+<audio id="music" preload="auto">
   <source src="Finding Her - kushagra.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Files for sliding photos
+const yesBtn = document.getElementById('yes');
+const noBtn = document.getElementById('no');
+const photoContainer = document.getElementById('photoContainer');
+const music = document.getElementById('music');
+const lastMsg = document.getElementById('lastMessage');
+
+// Photo files (already uploaded)
 const photoFiles = [
   'IMG_20241222_122949 (2).jpg',
   'IMG_20250511_184400 (1).jpg',
@@ -130,48 +102,47 @@ const photoFiles = [
   'Videoshot_20250721_215630.jpg'
 ];
 
-const noBtn = document.getElementById('no');
-const yesBtn = document.getElementById('yes');
-const photoContainer = document.getElementById('photoContainer');
-const music = document.getElementById('music');
-const lastMsg = document.getElementById('lastMessage');
+// Preload images
+const preloadedImages = [];
+photoFiles.forEach(src => {
+  const img = new Image();
+  img.src = src;
+  preloadedImages.push(img);
+});
 
-// NO Button behavior
-function moveNoButton() {
-  const rect = document.querySelector('.buttons').getBoundingClientRect();
-  const maxX = rect.width - noBtn.offsetWidth;
+// NO button moves continuously, cannot click
+function moveNo() {
+  const containerRect = document.querySelector('.buttons').getBoundingClientRect();
+  const maxX = containerRect.width - noBtn.offsetWidth;
   const maxY = 0;
   noBtn.style.left = Math.random()*maxX + 'px';
   noBtn.style.top = Math.random()*maxY + 'px';
 }
-noBtn.addEventListener('mouseover', moveNoButton);
-noBtn.addEventListener('touchstart', e=>{e.preventDefault(); moveNoButton();});
+noBtn.addEventListener('mouseover', moveNo);
+noBtn.addEventListener('touchstart', e=>{e.preventDefault(); moveNo();});
 
-// YES Button behavior
+// YES button click
 yesBtn.addEventListener('click', async ()=>{
   yesBtn.style.display='none';
   noBtn.style.display='none';
-  music.currentTime=0;
+
+  music.currentTime = 0;
   music.play().catch(()=>{});
 
-  for(let i=0;i<photoFiles.length;i++){
-    let img = document.createElement('img');
-    img.src = photoFiles[i];
-    img.className='slidePhoto';
+  for(let i=0; i<preloadedImages.length; i++){
+    const img = preloadedImages[i].cloneNode();
+    img.className = 'slidePhoto';
     photoContainer.appendChild(img);
 
-    // Wait small delay then slide in
-    await new Promise(r=>setTimeout(r,100));
+    // Slide in
     img.style.left='0';
+    await new Promise(r=>setTimeout(r,2000)); // slide duration
 
-    // Wait for transition to finish
-    await new Promise(r=>setTimeout(r,1600));
-
-    // Slide out left if even index, right if odd index
+    // Slide out
     img.style.left=(i%2===0 ? '-100%' : '100%');
-    await new Promise(r=>setTimeout(r,1600));
+    await new Promise(r=>setTimeout(r,2000));
 
-    // Remove img from container after sliding out
+    // Remove from DOM
     photoContainer.removeChild(img);
   }
 
@@ -179,5 +150,6 @@ yesBtn.addEventListener('click', async ()=>{
   lastMsg.style.display='block';
 });
 </script>
+
 </body>
 </html>

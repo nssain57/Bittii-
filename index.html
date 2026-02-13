@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Surprise ❤️</title>
 <style>
-html,body{margin:0;padding:0;height:100%;width:100%;overflow:hidden;font-family:monospace}
+html,body{margin:0;padding:0;height:100%;width:100%;overflow:hidden;font-family:monospace;}
 body{
   background:url('1770963669627.png') center/cover no-repeat fixed;
   display:flex;
@@ -37,6 +37,7 @@ body{
   margin-top:10px;
   max-width:300px;
   margin:auto;
+  position:relative;
 }
 button{
   padding:14px 26px;
@@ -48,7 +49,7 @@ button{
 }
 #yes{background:#ff6fb7;color:white;}
 #yes:active{transform:scale(.95);}
-#no{background:#555;color:white;position:relative;}
+#no{background:#555;color:white;position:absolute;}
 #photoFlow{
   display:flex;
   justify-content:center;
@@ -59,15 +60,15 @@ button{
   margin-top:20px;
 }
 .flowPhoto{
-  width:200px;
-  max-width:90%;
+  width:90%;
+  max-width:400px;
   height:280px;
   object-fit:cover;
   border-radius:15px;
   opacity:0;
   position:absolute;
   top:0;
-  transition: transform 2s ease, opacity 2s ease;
+  transition: transform 2.5s ease, opacity 2.5s ease;
 }
 #photoNames{display:none;margin-top:20px;color:#d63384;font-weight:bold;font-size:16px;text-align:left;}
 #finalMsg{
@@ -129,7 +130,7 @@ const photos=[
 'Videoshot_20250721_215630.jpg'
 ];
 
-// NO button: movable & unclickable
+// NO button: move randomly, can't click
 function moveNo(){
   const maxX=window.innerWidth-noBtn.offsetWidth-20;
   const maxY=window.innerHeight-noBtn.offsetHeight-20;
@@ -146,6 +147,8 @@ yesBtn.addEventListener('click',()=>{
   messagePopup.style.display='none';
   yesBtn.style.display='none';
   noBtn.style.display='none';
+
+  // Play music
   music.currentTime=0;
   music.play().catch(()=>{});
 
@@ -162,16 +165,15 @@ yesBtn.addEventListener('click',()=>{
     img.className='flowPhoto';
     photoFlow.appendChild(img);
 
-    // Left → right & right → left
     let direction=(i%2===0)?1:-1;
-    img.style.transform=`translateX(${direction*400}px)`;
+    img.style.transform=`translateX(${direction*500}px)`;
     img.style.opacity=0;
     setTimeout(()=>{
       img.style.transition='transform 2.5s ease, opacity 2.5s ease';
       img.style.transform='translateX(0)';
       img.style.opacity=1;
       setTimeout(()=>{
-        img.style.transform=`translateX(${-direction*400}px)`;
+        img.style.transform=`translateX(${-direction*500}px)`;
         img.style.opacity=0;
         setTimeout(()=>{
           photoNames.innerHTML+=photos[i]+'<br>';

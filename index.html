@@ -141,24 +141,25 @@ const photos = document.querySelectorAll('.photoSlide');
 const message = document.getElementById('message');
 const music = document.getElementById('music');
 
-// NO button only moves randomly inside screen
+// NO button only moves inside viewport, never disappears
 function moveNo(){
   const maxX = window.innerWidth - noBtn.offsetWidth - 10;
   const maxY = window.innerHeight - noBtn.offsetHeight - 10;
   noBtn.style.left = Math.random() * maxX + 'px';
   noBtn.style.top = Math.random() * maxY + 'px';
 }
+
+// Trigger move repeatedly for mouseover and touch
 noBtn.addEventListener('mouseover', moveNo);
 noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
 
-// YES click
+// YES button click logic
 yesBtn.addEventListener('click', ()=>{
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
   music.currentTime = 0;
   music.play().catch(()=>{});
 
-  // Show photos row
   photoRow.style.display = 'block';
 
   // Slide photos one by one
@@ -175,8 +176,8 @@ yesBtn.addEventListener('click', ()=>{
       current.style.opacity = '0';
       current.style.left = '-100%';
       index++;
-      setTimeout(showNextPhoto, 800); // next photo after transition
-    }, 2500); // time photo stays visible
+      setTimeout(showNextPhoto, 800);
+    }, 2500);
   }
   showNextPhoto();
 });
@@ -184,3 +185,4 @@ yesBtn.addEventListener('click', ()=>{
 
 </body>
 </html>
+

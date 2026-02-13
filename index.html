@@ -1,120 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Surprise ❤️</title>
 <style>
-html,body{margin:0;padding:0;height:100%;width:100%;overflow:hidden;font-family:monospace;}
-body{
-  background:url('1770963669627.png') center/cover no-repeat fixed;
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family:'Monospace', monospace;
+  overflow:hidden;
+  background: url('1770963669627.png') center/cover no-repeat fixed;
   display:flex;
   justify-content:center;
   align-items:center;
 }
-.container{
+
+.container {
   position:relative;
   width:100%;
-  max-width:450px;
-  padding:20px;
-  box-sizing:border-box;
+  max-width:480px;
   text-align:center;
+  padding:15px;
 }
-#messagePopup{
-  display:block;
-  font-size:18px;
-  color:#ff2f92;
+
+#messagePopup {
+  background: rgba(255,255,255,0.6);
+  padding: 20px;
+  border-radius:20px;
+  color:#ff4fa3;
   font-weight:bold;
-  background:rgba(255,255,255,0.6);
-  padding:15px 20px;
-  border-radius:15px;
+  font-size:18px;
+  text-shadow:0 2px 10px rgba(0,0,0,0.3);
   margin-bottom:20px;
-  text-shadow:1px 1px 3px #fff;
+  opacity:0;
+  transform: translateY(-20px);
+  transition: all 1s ease;
 }
-.buttons{
+
+.buttons {
   display:flex;
   justify-content:space-between;
   margin-top:10px;
-  max-width:300px;
-  margin:auto;
   position:relative;
 }
-button{
-  padding:14px 26px;
+
+button {
+  padding:14px 28px;
   border:none;
   border-radius:25px;
   font-size:18px;
   cursor:pointer;
-  transition:.2s;
-}
-#yes{background:#ff6fb7;color:white;}
-#yes:active{transform:scale(.95);}
-#no{background:#555;color:white;position:absolute;}
-#photoFlow{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  position:relative;
-  height:300px;
-  margin-top:20px;
-}
-.flowPhoto{
-  width:90%;
-  max-width:400px;
-  height:280px;
-  object-fit:cover;
-  border-radius:15px;
-  opacity:0;
-  position:absolute;
-  top:0;
-  transition: transform 2.5s ease, opacity 2.5s ease;
-}
-#photoNames{display:none;margin-top:20px;color:#d63384;font-weight:bold;font-size:16px;text-align:left;}
-#finalMsg{
-  display:none;
-  margin-top:18px;
-  font-size:18px;
-  color:#ff2f92;
   font-weight:bold;
-  background:rgba(255,255,255,0.6);
-  padding:15px 20px;
+  transition:0.2s ease;
+}
+
+#yes {
+  background:#ff6fb7;
+  color:white;
+}
+#yes:active{transform:scale(0.95);}
+
+#no {
+  background:#555;
+  color:white;
+  position:absolute;
+}
+
+#photoFlow {
+  margin-top:20px;
+  position:relative;
+  width:100%;
+  height:300px;
+  overflow:hidden;
+}
+
+.flowPhoto {
+  position:absolute;
+  width:90%;
+  max-width:420px;
   border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.butterflyGif {
+  position:absolute;
+  width:120px;
+  pointer-events:none;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+#photoNames {
+  margin-top:15px;
+  font-weight:bold;
+  color:#ff2f92;
+}
+
+#finalMsg {
+  display:none;
+  background: rgba(255,255,255,0.6);
+  padding:20px;
+  border-radius:20px;
+  margin-top:20px;
+  font-weight:bold;
+  color:#ff2f92;
 }
 </style>
 </head>
 <body>
 <div class="container">
   <div id="messagePopup">
-    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
-    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao <br>
+Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
   </div>
   <div class="buttons">
-    <button id="no">NO 😡</button>
-    <button id="yes">YES 🤗</button>
+    <button id="no">😡 NO</button>
+    <button id="yes">🤗 YES</button>
   </div>
   <div id="photoFlow"></div>
   <div id="photoNames"></div>
   <div id="finalMsg">
-    Bittii i love 💕 😘 you so much Mera ballu 
-    i miss u hope hmm milenge jldi hi
+Bittii i love 💕 😘 you so much Mera ballu <br>
+i miss u hope hmm milenge jldi hi
   </div>
 </div>
 
-<audio id="music" preload="auto">
+<audio id="music">
   <source src="Finding Her - kushagra.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const noBtn=document.getElementById('no');
-const yesBtn=document.getElementById('yes');
-const messagePopup=document.getElementById('messagePopup');
-const music=document.getElementById('music');
-const photoFlow=document.getElementById('photoFlow');
-const photoNames=document.getElementById('photoNames');
-const finalMsg=document.getElementById('finalMsg');
-
-const photos=[
+const photos = [
 'IMG_20241222_122949 (2).jpg',
 'IMG_20250511_184400 (1).jpg',
 'IMG_20250511_184402 (1).jpg',
@@ -130,17 +149,32 @@ const photos=[
 'Videoshot_20250721_215630.jpg'
 ];
 
-// NO button: move randomly, can't click
+const noBtn = document.getElementById('no');
+const yesBtn = document.getElementById('yes');
+const photoFlow = document.getElementById('photoFlow');
+const photoNames = document.getElementById('photoNames');
+const finalMsg = document.getElementById('finalMsg');
+const music = document.getElementById('music');
+const messagePopup = document.getElementById('messagePopup');
+
+// Animate message popup on load
+window.addEventListener('load', () => {
+  setTimeout(()=> {
+    messagePopup.style.opacity=1;
+    messagePopup.style.transform='translateY(0px)';
+  },500);
+});
+
+// NO button moves continuously, cannot click
 function moveNo(){
-  const maxX=window.innerWidth-noBtn.offsetWidth-20;
-  const maxY=window.innerHeight-noBtn.offsetHeight-20;
-  noBtn.style.position='absolute';
-  noBtn.style.left=Math.random()*maxX+'px';
-  noBtn.style.top=Math.random()*maxY+'px';
+  const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+  const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+  noBtn.style.left = Math.random()*maxX+'px';
+  noBtn.style.top = Math.random()*maxY+'px';
 }
-noBtn.addEventListener('mouseover',moveNo);
-noBtn.addEventListener('touchstart',moveNo);
-noBtn.addEventListener('click',e=>{e.preventDefault();});
+noBtn.addEventListener('mouseover', moveNo);
+noBtn.addEventListener('touchstart', moveNo);
+noBtn.addEventListener('click', e=>{ e.preventDefault(); });
 
 // YES button click
 yesBtn.addEventListener('click',()=>{
@@ -148,42 +182,51 @@ yesBtn.addEventListener('click',()=>{
   yesBtn.style.display='none';
   noBtn.style.display='none';
 
-  // Play music
   music.currentTime=0;
   music.play().catch(()=>{});
 
-  photoFlow.innerHTML='';
-  photoNames.innerHTML='';
-  let i=0;
+  let i = 0;
   function showNextPhoto(){
     if(i>=photos.length){
       finalMsg.style.display='block';
       return;
     }
-    const img=document.createElement('img');
-    img.src=photos[i];
+    const img = document.createElement('img');
+    img.src = photos[i];
     img.className='flowPhoto';
     photoFlow.appendChild(img);
 
-    let direction=(i%2===0)?1:-1;
-    img.style.transform=`translateX(${direction*500}px)`;
+    // butterfly GIF overlay
+    const butterfly = document.createElement('img');
+    butterfly.src='dezyne_3d-butterflies-25807_512.gif';
+    butterfly.className='butterflyGif';
+    img.parentNode.appendChild(butterfly);
+
+    let direction = (i%2===0)?1:-1;
+    img.style.left = (direction*500)+'px';
     img.style.opacity=0;
+
     setTimeout(()=>{
-      img.style.transition='transform 2.5s ease, opacity 2.5s ease';
-      img.style.transform='translateX(0)';
+      img.style.transition='all 3s ease';
+      img.style.left='0px';
       img.style.opacity=1;
+
       setTimeout(()=>{
-        img.style.transform=`translateX(${-direction*500}px)`;
+        img.style.transition='all 3s ease';
+        img.style.left=(-direction*500)+'px';
         img.style.opacity=0;
+
         setTimeout(()=>{
-          photoNames.innerHTML+=photos[i]+'<br>';
+          photoNames.innerHTML += photos[i] + '<br>';
           img.remove();
+          butterfly.remove();
           i++;
           showNextPhoto();
-        },2500);
-      },2500);
+        },3000);
+      },3000);
     },100);
   }
+
   showNextPhoto();
 });
 </script>

@@ -1,196 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Bittii ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valentine Surprise ❤️</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
-
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Shadows Into Light', cursive;
-  background: url('1770963669627.png') center/cover no-repeat fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin:0; padding:0; height:100%; width:100%;
+  font-family: 'Shadows Into Light', cursive, monospace;
+  background:url('1770963669627.png') center/cover no-repeat fixed;
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden;
 }
 
 .container {
-  width: 100%;
-  max-width: 420px;
-  padding: 20px 10px 40px 10px;
-  box-sizing: border-box;
-  text-align: center;
-  position: relative;
+  position:relative;
+  width:100%;
+  max-width:480px;
+  height:100dvh;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  box-sizing:border-box;
 }
 
-#firstMessage, #finalMessage {
-  font-size: 20px;
-  color: #ff4fa3;
-  font-weight: 700;
-  text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
-  margin-bottom: 20px;
-}
-
-#finalMessage {
-  display: none;
+h1 {
+  font-size:20px; font-weight:700; color:#ff4fa3;
+  line-height:1.5; text-shadow:0 2px 8px rgba(255,255,255,.7);
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+  margin-top:20px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  max-width:300px;
+  position:relative;
 }
 
 button {
-  padding: 14px 28px;
-  border-radius: 28px;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  padding:14px 26px;
+  font-size:18px;
+  border:none;
+  border-radius:28px;
+  cursor:pointer;
+  transition:0.2s ease;
 }
 
 #yes {
-  background: #ff6fb7;
-  color: #fff;
+  background:#ff6fb7; color:white;
+  box-shadow:0 6px 18px rgba(255,0,120,.35);
 }
-#yes:active {
-  transform: scale(0.95);
-}
+#yes:active {transform:scale(.94);}
 
 #no {
-  background: #555;
-  color: #fff;
-  position: absolute;
-  left: 0;
-  top: 0;
+  position:absolute; left:0; top:0;
+  background:#555; color:white;
 }
 
-.photo-slider {
-  width: 100%;
-  overflow: hidden;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 250px; 
-  position: relative;
+.photoRow {
+  display:none;
+  width:100%;
+  margin-top:20px;
+  overflow:hidden;
+  position:relative;
 }
 
-.photo-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transition: transform 1s ease, opacity 1s ease;
+.photoSlide {
+  width:90%;
+  max-width:400px;
+  height:50vh;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+  opacity:0;
+  position:absolute;
+  left:0; top:0;
+  transition: all 1.5s ease;
 }
+
+#message {
+  display:none;
+  margin-top:20px;
+  font-size:18px;
+  font-weight:700;
+  color:#ff2f92;
+  text-shadow:0 2px 10px rgba(255,255,255,.7);
+}
+
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div id="firstMessage">
-    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
-    <br>Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
-  </div>
-
-  <div class="photo-slider" id="photoSlider">
-    <img src="IMG_20241222_122949 (2).jpg">
-    <img src="IMG_20250511_184400 (1).jpg">
-    <img src="IMG_20250511_184402 (1).jpg">
-    <img src="IMG_20250511_184443.jpg">
-    <img src="IMG_20251225_135220 (1).jpg">
-    <img src="IMG_20251225_145348.jpg">
-    <img src="IMG_20251225_160243.jpg">
-    <img src="IMG_20251225_215527.jpg">
-    <img src="IMG_20251225_232613.jpg">
-    <img src="IMG_20251226_004530.jpg">
-    <img src="IMG_20260117_212207.jpg">
-    <img src="Videoshot_20250721_215442.jpg">
-    <img src="Videoshot_20250721_215630.jpg">
-  </div>
+  <h1 id="question">
+    Hello 👋 meri bitti kya haal Mera duggu🫣😘💐.<br>
+    i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao <br>
+    Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
+  </h1>
 
   <div class="buttons">
     <button id="no">NO 😡</button>
     <button id="yes">YES 🤗</button>
   </div>
 
-  <div id="finalMessage">
-    Bittii i love 💕 😘 you so much Mera ballu<br>
+  <div class="photoRow" id="photoRow">
+    <img src="IMG_20241222_122949 (2).jpg" class="photoSlide">
+    <img src="IMG_20250511_184400 (1).jpg" class="photoSlide">
+    <img src="IMG_20250511_184402 (1).jpg" class="photoSlide">
+    <img src="IMG_20250511_184443.jpg" class="photoSlide">
+    <img src="IMG_20251225_135220 (1).jpg" class="photoSlide">
+    <img src="IMG_20251225_145348.jpg" class="photoSlide">
+    <img src="IMG_20251225_160243.jpg" class="photoSlide">
+    <img src="IMG_20251225_215527.jpg" class="photoSlide">
+    <img src="IMG_20251225_232613.jpg" class="photoSlide">
+    <img src="IMG_20251226_004530.jpg" class="photoSlide">
+    <img src="IMG_20260117_212207.jpg" class="photoSlide">
+    <img src="Videoshot_20250721_215442.jpg" class="photoSlide">
+    <img src="Videoshot_20250721_215630.jpg" class="photoSlide">
+  </div>
+
+  <div id="message">
+    Bittii i love 💕 😘 you so much Mera ballu <br>
     i miss u hope hmm milenge jldi hi
   </div>
 </div>
 
-<audio id="music">
+<audio id="music" preload="auto">
   <source src="Finding Her - kushagra.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
-const firstMessage = document.getElementById('firstMessage');
-const finalMessage = document.getElementById('finalMessage');
+const yesBtn = document.getElementById('yes');
+const photoRow = document.getElementById('photoRow');
+const photos = document.querySelectorAll('.photoSlide');
+const message = document.getElementById('message');
 const music = document.getElementById('music');
-const photoSlider = document.getElementById('photoSlider');
-const photos = Array.from(photoSlider.querySelectorAll('img'));
 
-// NO button random move inside screen
-function moveNo() {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
+// NO button only moves randomly inside screen
+function moveNo(){
+  const maxX = window.innerWidth - noBtn.offsetWidth - 10;
+  const maxY = window.innerHeight - noBtn.offsetHeight - 10;
   noBtn.style.left = Math.random() * maxX + 'px';
   noBtn.style.top = Math.random() * maxY + 'px';
 }
 noBtn.addEventListener('mouseover', moveNo);
-noBtn.addEventListener('touchstart', e => { e.preventDefault(); moveNo(); });
+noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); moveNo(); });
 
-// YES button click
-yesBtn.addEventListener('click', () => {
+// YES click
+yesBtn.addEventListener('click', ()=>{
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
   music.currentTime = 0;
   music.play().catch(()=>{});
 
-  let i = 0;
-  photos[i].style.opacity = 1;
-  photos[i].style.zIndex = 1;
+  // Show photos row
+  photoRow.style.display = 'block';
 
-  const slideNext = () => {
-    if (i >= photos.length) {
-      finalMessage.style.display = 'block';
+  // Slide photos one by one
+  let index = 0;
+  function showNextPhoto(){
+    if(index >= photos.length){
+      message.style.display = 'block'; // show final message
       return;
     }
-
-    photos[i].style.opacity = 1;
-    photos[i].style.transform = 'translateX(0)';
-    photos[i].style.zIndex = 1;
-
-    setTimeout(() => {
-      photos[i].style.opacity = 0;
-      i++;
-      if(i < photos.length) {
-        // Alternate slide direction
-        photos[i].style.transform = (i%2===0 ? 'translateX(-100%)' : 'translateX(100%)');
-      }
-      setTimeout(slideNext, 1200); // slow slide duration
-    }, 2500);
+    const current = photos[index];
+    current.style.opacity = '1';
+    current.style.left = '0';
+    setTimeout(()=>{
+      current.style.opacity = '0';
+      current.style.left = '-100%';
+      index++;
+      setTimeout(showNextPhoto, 800); // next photo after transition
+    }, 2500); // time photo stays visible
   }
-
-  slideNext();
+  showNextPhoto();
 });
 </script>
 

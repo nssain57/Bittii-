@@ -5,101 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Bittii ❤️</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-family: 'Shadows Into Light', cursive;
-    background: url('1770963669627.png') center/cover no-repeat fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Shadows Into Light', cursive;
+  background: url('1770963669627.png') center/cover no-repeat fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .container {
-    width: 100%;
-    max-width: 420px;
-    text-align: center;
-    position: relative;
-    padding: 20px 10px 40px 10px;
-    box-sizing: border-box;
-  }
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 10px 40px 10px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
 
-  #firstMessage, #finalMessage {
-    font-size: 20px;
-    color: #ff4fa3;
-    font-weight: 700;
-    text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
-    margin-bottom: 20px;
-  }
+#firstMessage, #finalMessage {
+  font-size: 20px;
+  color: #ff4fa3;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
+  margin-bottom: 20px;
+}
 
-  #finalMessage {
-    display: none;
-  }
+#finalMessage {
+  display: none;
+}
 
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
 
-  button {
-    padding: 14px 28px;
-    border-radius: 28px;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
+button {
+  padding: 14px 28px;
+  border-radius: 28px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-  #yes {
-    background: #ff6fb7;
-    color: #fff;
-  }
-  #yes:active {
-    transform: scale(0.95);
-  }
+#yes {
+  background: #ff6fb7;
+  color: #fff;
+}
+#yes:active {
+  transform: scale(0.95);
+}
 
-  #no {
-    background: #555;
-    color: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
+#no {
+  background: #555;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 
-  .photo-slider {
-    width: 100%;
-    overflow: hidden;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.photo-slider {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px; /* height for mobile */
+  position: relative;
+}
 
-  .photo-slider img {
-    min-width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-    transition: transform 1s ease, opacity 1s ease;
-    display: none;
-  }
-
+.photo-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- FIRST MESSAGE WITH BUTTONS -->
   <div id="firstMessage">
     Hello 👋 meri bitti kya haal Mera duggu🫣😘💐. i know mne kuch nhi kiya valentine week me aapke liye but abi shayd🫡 aap 🙀🥰🎉happy ho jao 
     <br>Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby ⌛
@@ -130,7 +133,6 @@
     Bittii i love 💕 😘 you so much Mera ballu<br>
     i miss u hope hmm milenge jldi hi
   </div>
-
 </div>
 
 <audio id="music">
@@ -144,9 +146,9 @@ const firstMessage = document.getElementById('firstMessage');
 const finalMessage = document.getElementById('finalMessage');
 const music = document.getElementById('music');
 const photoSlider = document.getElementById('photoSlider');
-const photos = photoSlider.querySelectorAll('img');
+const photos = Array.from(photoSlider.querySelectorAll('img'));
 
-// NO button moves randomly on hover/touch
+// NO button random move inside screen
 function moveNo() {
   const maxX = window.innerWidth - noBtn.offsetWidth;
   const maxY = window.innerHeight - noBtn.offsetHeight;
@@ -160,27 +162,33 @@ noBtn.addEventListener('touchstart', e => { e.preventDefault(); moveNo(); });
 yesBtn.addEventListener('click', () => {
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
+  firstMessage.style.display = 'none';
   music.currentTime = 0;
   music.play().catch(()=>{});
 
-  firstMessage.style.display = 'none';
-
   let i = 0;
-  photos[i].style.display = 'block';
   photos[i].style.opacity = 1;
+  photos[i].style.zIndex = 1;
 
   const slideNext = () => {
-    if(i >= photos.length) {
+    if (i >= photos.length) {
       finalMessage.style.display = 'block';
       return;
     }
-    photos[i].style.display = 'block';
+
+    // show current
     photos[i].style.opacity = 1;
+    photos[i].style.transform = 'translateX(0)';
+    photos[i].style.zIndex = 1;
+
     setTimeout(() => {
       photos[i].style.opacity = 0;
       i++;
-      setTimeout(slideNext, 500); // 0.5s fade out
-    }, 2000); // 2s per photo
+      if(i < photos.length) {
+        photos[i].style.transform = (i%2===0 ? 'translateX(-100%)' : 'translateX(100%)');
+      }
+      setTimeout(slideNext, 1000); // fade duration
+    }, 2500); // show duration
   }
 
   slideNext();

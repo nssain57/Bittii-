@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Bitti ❤️</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap'); /* Shadowiest handwriting style */
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
 html, body {
   margin:0;
@@ -70,6 +70,7 @@ button{
   position:absolute;
   left:0;
 }
+
 .photoDisplay{
   display:none;
   margin-top:20px;
@@ -80,6 +81,7 @@ button{
   border-radius:20px;
   box-shadow:0 8px 25px rgba(0,0,0,0.3);
   opacity:0;
+  position:absolute;
 }
 
 #finalMessage{
@@ -99,6 +101,7 @@ button{
   from {opacity:0; transform:translateX(120px);}
   to {opacity:1; transform:translateX(0);}
 }
+
 </style>
 </head>
 <body>
@@ -114,7 +117,8 @@ Bittii 🦋 Mera will you be my valentine 🌹💐 for life 🧬 time Mera baby 
 <button id="yes">YES 🤗</button>
 </div>
 
-<img id="photoDisplay" class="photoDisplay">
+<div id="photoContainer" style="position:relative;width:100%;height:50vh;margin-top:20px;"></div>
+
 <div id="finalMessage">
 Bittii i love 💕 😘 you so much Mera ballu <br>
 i miss u hope hmm milenge jldi hi
@@ -129,7 +133,7 @@ i miss u hope hmm milenge jldi hi
 const yesBtn = document.getElementById('yes');
 const noBtn = document.getElementById('no');
 const startMessage = document.getElementById('startMessage');
-const photoDisplay = document.getElementById('photoDisplay');
+const photoContainer = document.getElementById('photoContainer');
 const finalMessage = document.getElementById('finalMessage');
 const song = document.getElementById('song');
 
@@ -168,27 +172,33 @@ yesBtn.addEventListener('click', () => {
   song.currentTime=0;
   song.play().catch(()=>{});
 
-  let i=0;
-  function showNextPhoto(){
-    if(i>=photos.length){
+  let i = 0;
+
+  function showNextPhoto() {
+    if(i >= photos.length){
       finalMessage.style.display='block';
       return;
     }
-    photoDisplay.src = photos[i];
-    photoDisplay.style.opacity = 0;
-    photoDisplay.style.animation = (i%2===0 ? 'slideInLeft' : 'slideInRight') + ' 1s forwards';
-    photoDisplay.style.display='block';
-    setTimeout(()=>{
-      photoDisplay.style.opacity = 0;
-      i++;
-      setTimeout(showNextPhoto, 300);
-    }, 2000);
+
+    const img = document.createElement('img');
+    img.src = photos[i];
+    img.className = 'photoDisplay';
+    img.style.animation = (i%2===0 ? 'slideInLeft' : 'slideInRight') + ' 1s forwards';
+    photoContainer.appendChild(img);
+    img.style.opacity=1;
+
+    i++;
+    setTimeout(() => {
+      showNextPhoto();
+    }, 2000); // photo display duration
   }
+
   showNextPhoto();
 });
 </script>
 
 </body>
 </html>
+
 
 
